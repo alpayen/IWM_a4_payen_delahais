@@ -19,7 +19,7 @@ io.on('connection', function (socket) {
             .in(e)
             .emit('msgTo'+e.room, {
                 user : e.user,
-                text: e.text
+                text: 'Joined the chat'
             });
     });
 
