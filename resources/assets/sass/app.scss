@@ -1,0 +1,30 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+
+#notifBox{
+  border: solid 2px cadetblue;
+  ul{
+    height: 150px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    li{
+      list-style: none;
+    }
+  }
+  .chatForm{
+    form{
+      display: flex;
+    }
+  }
+}
