@@ -17,6 +17,8 @@ var VueSocketio = require('vue-socket.io');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('notifbox', require('./components/NotifBox.vue') );
+Vue.component('codebox'), require('./components/Codebox.vue');
+
 const app = new Vue({
     el: '#app'
 });
