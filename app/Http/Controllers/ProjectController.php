@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function MongoDB\BSON\toJSON;
+use PhpParser\Node\Expr\Array_;
 
 class ProjectController extends Controller
 {
@@ -13,7 +15,8 @@ class ProjectController extends Controller
     private $user;
 
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -27,7 +30,7 @@ class ProjectController extends Controller
         $user = Auth::user();
         $projects = $user->projects;
         $createdProjects = $user->createdProjects;
-        return view('project.index')->with(compact('user','createdProjects','projects'));
+        return view('project.index')->with(compact('user', 'createdProjects', 'projects'));
     }
 
     /**
@@ -37,29 +40,43 @@ class ProjectController extends Controller
      */
     public function create()
     {
+
         return view('project.create')->with(compact('project'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
+        $request->session()->push('emails', $request->emails);
         $request->validate([
             'name' => 'required|unique:projects|max:100',
             'description' => 'max:255',
         ]);
-
         $project = new Project;
         $project->creator_id = Auth::user()->id;
         $project->name = $request->name;
         $project->description = $request->description;
 
-        if($project->save()){
+        if ($project->save()) {
+
+            $emails = $request->emails;
+            foreach ($emails as $email) {
+                $user = User::where('email', $email)->first();
+                if ($user) {
+                    $user->projects()->save($project);
+                    //SEND EMAIL YOU'VE BEEN ADDED TO A GROUP
+                } else {
+                    //SEND INVIATION EMAIL
+                }
+            }
+            if ($request->session()->has('emails')) {
+                $request->session()->pull('emails');
+            }
             return redirect(route('project.show', $project));
         }
         return redirect(route('project.create'))->withErrors('An error occured, please try again later');
@@ -68,14 +85,13 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
     {
         $user = Auth::user();
-
-        $userInfo = ['name'=>$user->name, 'id'=>$user->id, 'email'=>$user->email ];
+        $userInfo = ['name' => $user->name, 'id' => $user->id, 'email' => $user->email];
         $userInfo = json_encode($userInfo);
         return view('project.show')->with(compact('project', 'userInfo'));
     }
@@ -83,7 +99,7 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
@@ -94,13 +110,13 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Project  $project
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project)
     {
-
+        $request->session()->push('emails', $request->emails);
         $request->validate([
             'name' => 'required|max:100',
             'description' => 'max:255',
@@ -111,7 +127,18 @@ class ProjectController extends Controller
         $project->name = $request->name;
         $project->description;
 
-        if($project->update()){
+
+        if ($project->update()) {
+            $emails = $request->emails;
+            foreach ($emails as $email) {
+                $user = User::where('email', $email)->first();
+                if ($user && !in_array($email, $project->getUsersEmail())) {
+                    $user->projects()->save($project);
+                    //SEND EMAIL YOU'VE BEEN ADDED TO A GROUP
+                } else {
+                    //SEND INVIATION EMAIL
+                }
+            }
             return redirect(route('project.show', $project));
         }
         return redirect(route('project.create'))->withErrors('An error occured, please try again later');
@@ -121,7 +148,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
     public function destroy(Project $project)
@@ -129,4 +156,5 @@ class ProjectController extends Controller
         $project->delete();
         return redirect(route('project.index'));
     }
+
 }

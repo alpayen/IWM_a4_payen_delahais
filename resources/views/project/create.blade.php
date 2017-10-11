@@ -19,13 +19,32 @@
 
                         {{ Form::open(array('url' => route('project.store'))) }}
 
-                            {{Form::label('name', 'Project\'s name *')}}
-                            {{Form::text('name')}}
+                        {{Form::label('name', 'Project\'s name *')}}
+                        {{Form::text('name')}}
 
-                            {{Form::label('description', 'Project\'s description (optional)')}}
-                            {{Form::textarea('description')}}
+                        {{Form::label('description', 'Project\'s description (optional)')}}
+                        {{Form::textarea('description')}}
 
-                            {{Form::submit('Create')}}
+                        <br>
+                        <div class="emailsInputHolder">
+                            @if(session()->has('emails'))
+                                @foreach(session()->pull('emails')[0] as $email)
+                                    @if($email != "")
+                                        <div class="inputGroupSingle">
+                                            <input class="emailInput" type="email" name="emails[]" value="{{$email}}">
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                            <div class="inputGroupSingleEmpty" id="emailInputEmpty">
+                                <input class="emailInput" type="email" name="emails[]">
+                            </div>
+                        </div>
+
+
+                        <span class="addEmailInput">Click on me me to add another collaborator</span>
+
+                        {{Form::submit('Create')}}
                         {{ Form::close() }}
                     </div>
                 </div>

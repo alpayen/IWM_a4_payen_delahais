@@ -4257,7 +4257,16 @@ var VueSocketio = __webpack_require__(55);
  */
 Vue.component('notifbox', __webpack_require__(56));
 var app = new Vue({
-  el: '#app'
+    el: '#app'
+});
+
+$(document).ready(function () {
+    var emailsInput = $('.emailsInputHolder');
+    var inputGroupSingle = $('#emailInputEmpty');
+    console.log(inputGroupSingle);
+    $('.addEmailInput').click(function () {
+        emailsInput.append(inputGroupSingle.html());
+    });
 });
 
 /***/ }),

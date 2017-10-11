@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">New project</div>
+                    <div class="panel-heading">Edit project</div>
                     <div class="panel-body">
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -24,6 +24,23 @@
 
                         {{Form::label('description', 'Project\'s description (optional)')}}
                         {{Form::textarea('description', $project->description)}}
+
+                            <div class="emailsInputHolder">
+                                @if(session()->has('emails'))
+                                    @foreach($project->getUsersEmail() as $email)
+                                        @if($email != "")
+                                            <div class="inputGroupSingle">
+                                                <input class="emailInput" type="email" name="emails[]" value="{{$email}}">
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="inputGroupSingleEmpty" id="emailInputEmpty">
+                                <input class="emailInput" type="email" name="emails[]">
+                            </div>
+
+                            <span class="addEmailInput">Click on me me to add another collaborator</span>
 
                         {{Form::submit('Update')}}
                         {{ Form::close() }}

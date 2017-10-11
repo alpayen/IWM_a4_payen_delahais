@@ -23,3 +23,11 @@ const app = new Vue({
 
 
 
+$( document ).ready(function() {
+    var emailsInput = $('.emailsInputHolder');
+    var inputGroupSingle = $('#emailInputEmpty');
+    console.log(inputGroupSingle);
+    $('.addEmailInput').click(function () {
+        emailsInput.append(inputGroupSingle.html());
+    })
+});

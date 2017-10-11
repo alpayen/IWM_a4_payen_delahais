@@ -24,4 +24,18 @@ class Project extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
+    public function getUsersEmail()
+    {
+        $emails = [];
+        foreach ($this->users as $user){
+            array_push($emails, $user->email);
+        }
+        return $emails;
+    }
 }
