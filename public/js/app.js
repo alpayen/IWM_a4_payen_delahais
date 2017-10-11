@@ -45322,7 +45322,7 @@ var socket = io.connect('http://localhost:3000');
         console.log(this.project);
         socket.emit('joinRoom', {
             room: this.project,
-            user: e.user,
+            user: this.user,
             msg: this.chatMsg
         });
         //socket.emit('msgToServer', this.user.name + ' joined');
@@ -45343,8 +45343,8 @@ var socket = io.connect('http://localhost:3000');
             if (this.chatMsg) {
                 socket.emit('msgToServer', {
                     room: this.project,
-                    user: e.user,
-                    msg: this.chatMsg
+                    user: this.user,
+                    text: this.chatMsg
                 });
                 this.chatMsg = '';
             }
@@ -48480,7 +48480,7 @@ var render = function() {
         return _c("li", [
           _c("p", [
             _c("span", [_vm._v("[" + _vm._s(msg.date) + "]")]),
-            _vm._v(" " + _vm._s(msg.text))
+            _vm._v(" " + _vm._s(msg.user.name) + " :  " + _vm._s(msg.text))
           ])
         ])
       })
