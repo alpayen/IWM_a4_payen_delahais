@@ -21,8 +21,6 @@ const app = new Vue({
     el: '#app'
 });
 
-
-
 $( document ).ready(function() {
     var emailsInput = $('.emailsInputHolder');
     var inputGroupSingle = $('#emailInputEmpty');

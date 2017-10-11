@@ -45320,11 +45320,18 @@ var socket = io.connect('http://localhost:3000');
     mounted: function mounted() {
         console.log(this.user);
         console.log(this.project);
+        socket.emit('joinRoom', {
+            room: this.project,
+            user: e.user,
+            msg: this.chatMsg
+        });
+        //socket.emit('msgToServer', this.user.name + ' joined');
         var $this = this;
-        socket.on('msgToClient', function (e) {
+        socket.on('msgTo' + this.project, function (e) {
             //console.log(this);
             $this.messages.push({
-                text: e,
+                user: e.user,
+                text: e.text,
                 date: Date.now()
 
             });
@@ -45334,10 +45341,10 @@ var socket = io.connect('http://localhost:3000');
     methods: {
         chatSubmit: function chatSubmit() {
             if (this.chatMsg) {
-                socket.emit('msgToServer', this.chatMsg);
-                this.messages.push({
-                    text: this.chatMsg,
-                    date: Date.now()
+                socket.emit('msgToServer', {
+                    room: this.project,
+                    user: e.user,
+                    msg: this.chatMsg
                 });
                 this.chatMsg = '';
             }

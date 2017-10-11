@@ -26,12 +26,19 @@
         props : ['user', 'project'],
         mounted() {
             console.log(this.user);
-            console.log(this.project    );
+            console.log(this.project);
+            socket.emit('joinRoom', {
+                room : this.project,
+                user : e.user,
+                msg : this.chatMsg
+            });
+            //socket.emit('msgToServer', this.user.name + ' joined');
             let $this = this;
-            socket.on('msgToClient', function (e) {
+            socket.on('msgTo'+this.project, function (e) {
                 //console.log(this);
                 $this.messages.push({
-                    text: e,
+                    user : e.user,
+                    text: e.text,
                     date: Date.now()
 
                 })
@@ -40,10 +47,10 @@
         methods: {
             chatSubmit: function () {
                 if (this.chatMsg) {
-                    socket.emit('msgToServer', this.chatMsg);
-                    this.messages.push({
-                        text : this.chatMsg,
-                        date : Date.now()
+                    socket.emit('msgToServer', {
+                        room : this.project,
+                        user : e.user,
+                        msg : this.chatMsg
                     });
                     this.chatMsg = '';
                 }

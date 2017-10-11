@@ -10,10 +10,26 @@ server.listen(3000, function(){
 });
 
 io.on('connection', function (socket) {
-    console.log('client connect');
+    console.log('client connected to gloabal room');
+
+    //Rooms
+    socket.on('joinRoom', function (e) {
+        socket.join(e.room);
+        socket
+            .in(e)
+            .emit('msgTo'+e.room, {
+                user : e.user,
+                text: e.text
+            });
+    });
 
     socket.on('msgToServer', function (e) {
-        socket.broadcast.emit('msgToClient', e);
+        socket
+            .in(e.room)
+            .emit('msgTo'+e.room, {
+                user : e.user,
+                text: e.text
+            });
     });
 
 

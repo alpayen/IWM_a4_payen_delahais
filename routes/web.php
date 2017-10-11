@@ -21,3 +21,8 @@ Route::get('/room', 'RoomController@index')->name('room');
 
 
 Route::resource('project', 'ProjectController');
+
+$projects = \App\Project::all();
+foreach ($projects as $project){
+    Route::get($project->name, 'ProjectController@show');
+}

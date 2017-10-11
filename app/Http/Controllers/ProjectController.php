@@ -69,9 +69,9 @@ class ProjectController extends Controller
                 $user = User::where('email', $email)->first();
                 if ($user) {
                     $user->projects()->save($project);
-                    //SEND EMAIL YOU'VE BEEN ADDED TO A GROUP
+                    //TODO SEND EMAIL YOU'VE BEEN ADDED TO A GROUP
                 } else {
-                    //SEND INVIATION EMAIL
+                    //TODO SEND INVIATION EMAIL
                 }
             }
             if ($request->session()->has('emails')) {
@@ -134,9 +134,9 @@ class ProjectController extends Controller
                 $user = User::where('email', $email)->first();
                 if ($user && !in_array($email, $project->getUsersEmail())) {
                     $user->projects()->save($project);
-                    //SEND EMAIL YOU'VE BEEN ADDED TO A GROUP
+                    //TODO SEND EMAIL YOU'VE BEEN ADDED TO A GROUP
                 } else {
-                    //SEND INVIATION EMAIL
+                    //TODO SEND INVIATION EMAIL
                 }
             }
             return redirect(route('project.show', $project));
