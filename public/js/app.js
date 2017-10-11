@@ -45299,7 +45299,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 var io = __webpack_require__(59);
-var socket = io.connect('http://localhost:3000');
+//let socket = io.connect('http://localhost:3000');
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {

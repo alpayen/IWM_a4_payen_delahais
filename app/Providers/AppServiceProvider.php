@@ -18,11 +18,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        View::share('key', 'value');
-
-        if(Auth::check()){
-            View::share('user', Auth::user());
-        }
     }
 
     /**

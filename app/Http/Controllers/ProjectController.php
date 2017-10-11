@@ -23,7 +23,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('project.index');
+        $user = Auth::user();
+        $projects = $user->projects;
+        $createdProjects = $user->createdProjects;
+        return view('project.index')->with(compact('user','createdProjects','projects'));
     }
 
     /**
@@ -33,7 +36,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create')->with(compact('project'));
     }
 
     /**
@@ -44,7 +47,21 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => 'required|unique:projects|max:100',
+            'description' => 'max:255',
+        ]);
+
+        $project = new Project;
+        $project->creator_id = Auth::user()->id;
+        $project->name = $request->name;
+        $project->description = $request->description;
+
+        if($project->save()){
+            return redirect(route('project.show', $project));
+        }
+        return redirect(route('project.create'))->withErrors('An error occured, please try again later');
     }
 
     /**
@@ -55,7 +72,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('project.show')->with(compact('project'));
     }
 
     /**
@@ -66,7 +83,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('project.edit')->with(compact('project'));
     }
 
     /**
@@ -78,7 +95,22 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+
+        $request->validate([
+            'name' => 'required|max:100',
+            'description' => 'max:255',
+        ]);
+
+
+        $project = Project::find($project->id);
+        $project->name = $request->name;
+        $project->description;
+
+        if($project->update()){
+            return redirect(route('project.show', $project));
+        }
+        return redirect(route('project.create'))->withErrors('An error occured, please try again later');
+
     }
 
     /**
@@ -89,6 +121,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect(route('project.index'));
     }
 }
