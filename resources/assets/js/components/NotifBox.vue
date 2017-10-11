@@ -15,20 +15,18 @@
 </template>
 <script>
     let io = require('socket.io-client');
-    //let socket = io.connect('http://localhost:3000');
+    let socket = io.connect('http://localhost:3000');
     export default {
         data: function () {
             return {
                 chatMsg: "",
-                messages: [
-                    {
-                        text: "Je suis un message",
-                        date: "01/01/0000 10:23"
-                    }
-                ]
+                messages: []
             }
         },
+        props : ['user', 'project'],
         mounted() {
+            console.log(this.user);
+            console.log(this.project    );
             let $this = this;
             socket.on('msgToClient', function (e) {
                 //console.log(this);

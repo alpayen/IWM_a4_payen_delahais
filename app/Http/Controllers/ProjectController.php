@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function MongoDB\BSON\toJSON;
 
 class ProjectController extends Controller
 {
@@ -72,7 +73,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('project.show')->with(compact('project'));
+        $user = Auth::user();
+
+        $userInfo = ['name'=>$user->name, 'id'=>$user->id, 'email'=>$user->email ];
+        $userInfo = json_encode($userInfo);
+        return view('project.show')->with(compact('project', 'userInfo'));
     }
 
     /**

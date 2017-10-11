@@ -45299,18 +45299,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 var io = __webpack_require__(59);
-//let socket = io.connect('http://localhost:3000');
+var socket = io.connect('http://localhost:3000');
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             chatMsg: "",
-            messages: [{
-                text: "Je suis un message",
-                date: "01/01/0000 10:23"
-            }]
+            messages: []
         };
     },
+    props: ['user', 'project'],
     mounted: function mounted() {
+        console.log(this.user);
+        console.log(this.project);
         var $this = this;
         socket.on('msgToClient', function (e) {
             //console.log(this);
