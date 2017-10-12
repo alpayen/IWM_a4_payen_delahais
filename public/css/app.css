@@ -8355,7 +8355,7 @@ button.close {
 }
 
 #notifBox ul {
-  height: 150px;
+  height: 100px;
   overflow-y: scroll;
   display: -webkit-box;
   display: -ms-flexbox;

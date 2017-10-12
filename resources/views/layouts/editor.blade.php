@@ -65,7 +65,6 @@
         </div>
     </div>
 </nav>
-
 <div id="app">
     @yield('content')
 </div>
