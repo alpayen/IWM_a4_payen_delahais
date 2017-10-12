@@ -30,6 +30,6 @@ Route::get('/room', 'RoomController@index')->name('room');
 
 
 Route::get('/project', 'ProjectController@index')->name('project.index');
-Route::post('/project/create', 'ProjectController@create')->name('project.create');
-
+Route::get('/project/create', 'ProjectController@create')->name('project.create');
+Route::post('/project/store', 'ProjectController@create')->name('project.store');
 
