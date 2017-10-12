@@ -1,5 +1,4 @@
 <template id="codebox-template">
-    <!-- Bidirectional data binding（双向数据绑定） -->
     <codemirror ref="myEditor"
                 :code="code"
                 :options="editorOptions"
@@ -9,42 +8,47 @@
     </codemirror></template>
 
 <script>
-    // Similarly, you can also introduce the resource pack you want to use within the component
-    // require('codemirror/some-resource')
     import 'codemirror/keymap/sublime';
+
+    //let io = require('socket.io-client');
+    //let socket = io.connect('http://localhost:3000');
+
     export default {
         data () {
             return {
+                custoEdit : {},
                 code: '',
                 editorOptions: {
-                    // codemirror options
                     tabSize: 4,
                     mode: 'text/javascript',
                     theme: 'base16-dark',
                     lineNumbers: true,
                     line: true,
                     keyMap: "sublime",
-                    // 按键映射，比如Ctrl键映射autocomplete，autocomplete是hint代码提示事件
                     extraKeys: { "Ctrl": "autocomplete" },
-                    // 代码折叠
                     foldGutter: true,
                     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-                    // 选中文本自动高亮，及高亮方式
                     styleSelectedText: true,
                     highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
-                    // more codemirror options...
-                    // 如果有hint方面的配置，也应该出现在这里
                 }
             }
         },
         methods: {
             onEditorReady(editor) {
-
+                this.custoEdit = editor;
+               // console.log(this);
             },
             onEditorFocus(editor) {
-
             },
             onEditorCodeChange(newCode) {
+                let onLine = this.custoEdit.doc.getCursor().line;
+                let lineContent = this.custoEdit.doc.getLine(onLine);
+                console.log(onLine + ' Content : '+lineContent );
+                this.$parent.socket('codeToServer', {
+                    room : this.project,
+                    line : onLine,
+                    content : lineContent,
+                });
 
             }
         },
@@ -54,8 +58,7 @@
             }
         },
         mounted() {
-            // console.log('this is current editor object', this.editor)
-            // you can use this.editor to do something...
+
         }
     }
 </script>
