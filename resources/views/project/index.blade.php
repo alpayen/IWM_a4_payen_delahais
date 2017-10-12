@@ -10,12 +10,13 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <h2>My projects</h2>
-                            <ul>
+                            <h2 class="text-center">My projects</h2>
+                            <ul class="list-group">
                                 @if(count($createdProjects ) != 0)
                                     @foreach($createdProjects as $createdProject)
-                                        <li>
-                                            <a href="{{route('project.show',['id'=>$createdProject->id])}}">{{$createdProject->name}}</a>
+                                        <li class="list-group-item">
+                                            <a class="list-group-item list-group-item-action list-group-item-primary text-uppercase"
+                                               href="{{route('project.show',['id'=>$createdProject->id])}}">{{$createdProject->name}}</a>
                                             @if($createdProject->description)
                                                 <p>{{$createdProject->description}}</p>
                                             @endif
@@ -23,13 +24,14 @@
                                     @endforeach
                                 @endif
                             </ul>
-                            <h2>Shared with me</h2>
+                            <h2 class="text-center">Shared with me</h2>
                             <ul>
 
                                 @if(count($projects) != 0)
                                     @foreach($projects as $project)
-                                        <li>
-                                            <a href="{{route('project.show',['id'=>$project->id])}}">{{$project->name}}</a>
+                                        <li class="list-group-item">
+                                            <a class="list-group-item list-group-item-action list-group-item-primary text-uppercase"
+                                               href="{{route('project.show',['id'=>$project->id])}}">{{$project->name}}</a>
                                             @if($project->description)
                                                 <p>{{$project->description}}</p>
                                             @endif

@@ -17,13 +17,13 @@
                             </div>
                         @endif
 
-                        {{ Form::open(array('url' => route('project.store'))) }}
+                            {{ Form::open(array('url' => route('project.store'))) }}
 
-                        {{Form::label('name', 'Project\'s name *')}}
-                        {{Form::text('name')}}
+                            {{Form::label('name', 'Project\'s name *')}}
+                            {{Form::text('name', Null,  array('class' => 'form-control'))}}
 
-                        {{Form::label('description', 'Project\'s description (optional)')}}
-                        {{Form::textarea('description')}}
+                            {{Form::label('description', 'Project\'s description (optional)')}}
+                            {{Form::textarea('description' , Null , array('class' => 'form-control'))}}
 
                         <br>
                         <div class="emailsInputHolder">
@@ -36,15 +36,15 @@
                                     @endif
                                 @endforeach
                             @endif
+                            <span class="addEmailInput">Click on me me to add another collaborator</span>
                             <div class="inputGroupSingleEmpty" id="emailInputEmpty">
-                                <input class="emailInput" type="email" name="emails[]">
+                                <input class="form-control" type="email" name="emails[]">
                             </div>
                         </div>
 
 
-                        <span class="addEmailInput">Click on me me to add another collaborator</span>
 
-                        {{Form::submit('Create')}}
+                        {{Form::submit('Create', array('class' => 'btn btn-primary'))}}
                         {{ Form::close() }}
                     </div>
                 </div>
