@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 465),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,9 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'mehdidelahais63@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Projet de Alex et Mehdi'),
-    ],
+        'address' => 'mehdidelahais63@gmail.com', 'name' => 'bas les couilles'],
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +82,9 @@ return [
     |
     */
 
-    'username' => env('mehdidelahais@gmail.com'),
+    'username' => env('mehdidelahais63@gmail.com'),
 
-    'password' => env('slackdown78'),
+    'password' =>env('slackdown78'),
 
     /*
     |--------------------------------------------------------------------------
