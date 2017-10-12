@@ -19136,8 +19136,8 @@ var editorcontainer = new Vue({
         io: __webpack_require__(304),
         socket: io.connect('http://localhost:3000')
     }, created: function created() {
-        console.log('Parent Mounted, long live the king');
-        console.log(this.socket);
+        //console.log('Parent Mounted, long live the king');
+        //console.log(this.socket);
     }
 });
 
@@ -86394,7 +86394,7 @@ function callEventListner() {}
     },
     props: ['user', 'project'],
     mounted: function mounted() {
-        console.log(this);
+        //console.log(this);
         this.$parent.socket.emit('joinRoom', {
             room: this.project,
             user: this.user,
@@ -86561,6 +86561,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -86575,7 +86576,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             editorOptions: {
                 tabSize: 4,
                 mode: 'text/javascript',
-                theme: 'base16-dark',
+                theme: 'base16-light',
                 lineNumbers: true,
                 line: true,
                 keyMap: "sublime",
@@ -86595,10 +86596,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         onEditorFocus: function onEditorFocus(editor) {},
         onEditorCodeChange: function onEditorCodeChange(newCode) {
+            //console.log(this);
             var onLine = this.custoEdit.doc.getCursor().line;
             var lineContent = this.custoEdit.doc.getLine(onLine);
-            console.log(onLine + ' Content : ' + lineContent);
-            this.$parent.socket('codeToServer', {
+            this.$parent.socket.emit('codeToServer', {
                 room: this.project,
                 line: onLine,
                 content: lineContent
@@ -86610,7 +86611,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.$refs.codebox.editor;
         }
     },
-    mounted: function mounted() {}
+    props: ['user', 'project'],
+    mounted: function mounted() {
+        var $this = this;
+        this.$parent.socket.on('codeTo' + this.project, function (e) {
+            console.log(e);
+            $this.custoEdit.doc.replaceRange(e.line, e.line + 1, e.content);
+        });
+    }
 });
 
 /***/ }),

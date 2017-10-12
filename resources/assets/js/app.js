@@ -27,8 +27,8 @@ const editorcontainer = new Vue({
        io : require('socket.io-client'),
        socket : io.connect('http://localhost:3000')
    },created: function () {
-        console.log('Parent Mounted, long live the king');
-        console.log(this.socket);
+        //console.log('Parent Mounted, long live the king');
+        //console.log(this.socket);
     }
 });
 

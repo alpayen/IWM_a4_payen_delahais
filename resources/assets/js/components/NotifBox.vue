@@ -32,7 +32,7 @@
         },
         props: ['user', 'project'],
         mounted() {
-            console.log(this);
+            //console.log(this);
             this.$parent.socket.emit('joinRoom', {
                 room: this.project,
                 user: this.user,

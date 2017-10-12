@@ -46,7 +46,14 @@ io.on('connection', function (socket) {
 
         //Room's code
     socket.on('codeToServer', function (e) {
-        console.log(e);
+        io
+            .broadcast
+            .to(e.room)
+            .emit('codeTo'+e.room, {
+                user : e.user,
+                line: e.line,
+                content : e.content
+            });
     });
 
 
