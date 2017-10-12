@@ -49194,16 +49194,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        onEditorReady: function onEditorReady(editor) {
-            console.log('the editor is readied!', editor);
-        },
-        onEditorFocus: function onEditorFocus(editor) {
-            console.log('the editor is focus!', editor);
-        },
-        onEditorCodeChange: function onEditorCodeChange(newCode) {
-            console.log('this is new code', newCode);
-            this.code = newCode;
-        }
+        onEditorReady: function onEditorReady(editor) {},
+        onEditorFocus: function onEditorFocus(editor) {},
+        onEditorCodeChange: function onEditorCodeChange(newCode) {}
     },
     computed: {
         editor: function editor() {

@@ -39,14 +39,13 @@
         },
         methods: {
             onEditorReady(editor) {
-                console.log('the editor is readied!', editor)
+
             },
             onEditorFocus(editor) {
-                console.log('the editor is focus!', editor)
+
             },
             onEditorCodeChange(newCode) {
-                console.log('this is new code', newCode)
-                this.code = newCode
+
             }
         },
         computed: {
