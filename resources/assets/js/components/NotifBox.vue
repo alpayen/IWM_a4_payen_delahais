@@ -2,7 +2,7 @@
     <div>
         <ul>
             <li v-for="msg in messages">
-                <p><span>[{{msg.date}}]</span> {{msg.text}}</p>
+                <p><span>[{{msg.date}}]</span> {{msg.user.name}} :  {{msg.text}}</p>
             </li>
         </ul>
         <div class="chatForm">
@@ -29,7 +29,7 @@
             console.log(this.project);
             socket.emit('joinRoom', {
                 room : this.project,
-                user : e.user,
+                user : this.user,
                 msg : this.chatMsg
             });
             //socket.emit('msgToServer', this.user.name + ' joined');
@@ -38,7 +38,7 @@
                 //console.log(this);
                 $this.messages.push({
                     user : e.user,
-                    text: e.text,
+                    text:  e.text,
                     date: Date.now()
 
                 })
@@ -49,8 +49,8 @@
                 if (this.chatMsg) {
                     socket.emit('msgToServer', {
                         room : this.project,
-                        user : e.user,
-                        msg : this.chatMsg
+                        user : this.user,
+                        text : this.chatMsg
                     });
                     this.chatMsg = '';
                 }

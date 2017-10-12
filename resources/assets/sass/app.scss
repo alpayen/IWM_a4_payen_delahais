@@ -7,13 +7,10 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-
-
-
 #notifBox{
   border: solid 2px cadetblue;
   ul{
-    height: 150px;
+    height: 100px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -28,3 +25,4 @@
     }
   }
 }
+

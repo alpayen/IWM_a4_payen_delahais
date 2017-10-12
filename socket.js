@@ -3,7 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(
     server,
-    {origins:'localhost:* http://locahost:*'});
+    {origins:'localhost:* http://locahost:* *.http://locahost:*'});
 
 server.listen(3000, function(){
     console.log("Server up and running...");
@@ -15,16 +15,18 @@ io.on('connection', function (socket) {
     //Rooms
     socket.on('joinRoom', function (e) {
         socket.join(e.room);
-        socket
-            .in(e)
+        console.log('client joined room '+ e.room);
+        io
+            .in(e.room)
             .emit('msgTo'+e.room, {
                 user : e.user,
-                text: e.text
+                text: ' joined the chat'
             });
+        console.log('might have send a message to the dudes')
     });
 
     socket.on('msgToServer', function (e) {
-        socket
+        io
             .in(e.room)
             .emit('msgTo'+e.room, {
                 user : e.user,
