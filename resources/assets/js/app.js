@@ -8,29 +8,34 @@
 require('./bootstrap');
 window.Vue = require('vue');
 
-var VueSocketio = require('vue-socket.io');
-//Vue.use(VueSocketio, socketio('http://localhost:3000'));
-//console.log(socket);
+//var VueSocketio = require('vue-socket.io');
 
 var VueCodeMirror = require('vue-codemirror');
-
 Vue.use(VueCodeMirror);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 Vue.component('notifbox', require('./components/NotifBox.vue') );
 Vue.component('codebox', require('./components/Codebox.vue') );
 
-const app = new Vue({
-    el: '#app'
+const editorcontainer = new Vue({
+   el: '#editorcontainer',
+   data : {
+       io : require('socket.io-client'),
+       socket : io.connect('http://localhost:3000')
+   },created: function () {
+        console.log('Parent Mounted, long live the king');
+        console.log(this.socket);
+    }
 });
+
 
 $( document ).ready(function() {
     var emailsInput = $('.emailsInputHolder');
     var inputGroupSingle = $('#emailInputEmpty');
-    console.log(inputGroupSingle);
     $('.addEmailInput').click(function () {
         emailsInput.append(inputGroupSingle.html());
     })

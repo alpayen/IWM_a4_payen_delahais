@@ -21,6 +21,8 @@ io.on('connection', function (socket) {
     console.log('client connected to gloabal room');
 
     //Rooms
+
+        //Room's chat
     socket.on('joinRoom', function (e) {
         socket.join(e.room);
         console.log('client joined room '+ e.room);
@@ -40,6 +42,11 @@ io.on('connection', function (socket) {
                 user : e.user,
                 text: e.text
             });
+    });
+
+        //Room's code
+    socket.on('codeToServer', function (e) {
+        console.log(e);
     });
 
 

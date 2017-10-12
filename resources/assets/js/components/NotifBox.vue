@@ -14,47 +14,52 @@
     </div>
 </template>
 <script>
-    let io = require('socket.io-client');
-    let socket = io.connect('http://localhost:3000');
+
+    //let io = require('socket.io-client');
+    //let socket = io.connect('http://localhost:3000');
+
+    function callEventListner() {
+
+    }
+
+    //console.log(id);
     export default {
         data: function () {
             return {
                 chatMsg: "",
-                messages: []
+                messages: [],
             }
         },
-        props : ['user', 'project'],
+        props: ['user', 'project'],
         mounted() {
-            console.log(this.user);
-            console.log(this.project);
-            socket.emit('joinRoom', {
-                room : this.project,
-                user : this.user,
-                msg : this.chatMsg
+            console.log(this);
+            this.$parent.socket.emit('joinRoom', {
+                room: this.project,
+                user: this.user,
+                msg: this.chatMsg
             });
-            //socket.emit('msgToServer', this.user.name + ' joined');
             let $this = this;
-            socket.on('msgTo'+this.project, function (e) {
+            this.$parent.socket.on('msgTo' + this.project, function (e) {
                 //console.log(this);
                 $this.messages.push({
-                    user : e.user,
-                    text:  e.text,
+                    user: e.user,
+                    text: e.text,
                     date: Date.now()
 
                 })
-            })
+            });
         },
         methods: {
             chatSubmit: function () {
                 if (this.chatMsg) {
-                    socket.emit('msgToServer', {
-                        room : this.project,
-                        user : this.user,
-                        text : this.chatMsg
+                    this.$parent.socket.emit('msgToServer', {
+                        room: this.project,
+                        user: this.user,
+                        text: this.chatMsg
                     });
                     this.chatMsg = '';
                 }
-            },
+            }
         }
     }
 

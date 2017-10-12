@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Mail;
+
 Route::domain('{project}.localhost')->group(function () {
     Route::get('/live', 'ProjectController@show')->name('project.show');
     Route::get('/edit', 'ProjectController@edit')->name('project.edit');
@@ -32,4 +34,5 @@ Route::get('/room', 'RoomController@index')->name('room');
 Route::get('/project', 'ProjectController@index')->name('project.index');
 Route::get('/project/create', 'ProjectController@create')->name('project.create');
 Route::post('/project/store', 'ProjectController@store')->name('project.store');
+
 
