@@ -6,6 +6,7 @@ use App\Project;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use function MongoDB\BSON\toJSON;
 use PhpParser\Node\Expr\Array_;
 
@@ -88,7 +89,7 @@ class ProjectController extends Controller
      * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show( Project $project)
     {
         $user = Auth::user();
         $userInfo = ['name' => $user->name, 'id' => $user->id, 'email' => $user->email];

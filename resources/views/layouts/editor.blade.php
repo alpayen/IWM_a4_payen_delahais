@@ -59,6 +59,7 @@
                                 {{ csrf_field() }}
                             </form>
                         </li>
+                        <li><a href="{{ asset('/project') }}">Project</a></li>
                     </ul>
                 </li>
             </ul>
