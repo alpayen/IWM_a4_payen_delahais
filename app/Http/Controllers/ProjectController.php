@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\User;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function MongoDB\BSON\toJSON;
@@ -63,7 +64,6 @@ class ProjectController extends Controller
         $project->description = $request->description;
 
         if ($project->save()) {
-
             $emails = $request->emails;
             foreach ($emails as $email) {
                 $user = User::where('email', $email)->first();
@@ -157,4 +157,7 @@ class ProjectController extends Controller
         return redirect(route('project.index'));
     }
 
+
 }
+
+

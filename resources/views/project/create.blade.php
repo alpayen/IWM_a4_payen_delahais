@@ -41,10 +41,7 @@
                                 <input class="form-control" type="email" name="emails[]">
                             </div>
                         </div>
-
-
-
-                        {{Form::submit('Create', array('class' => 'btn btn-primary'))}}
+                            {{Form::submit('Create', array('class' => 'btn btn-primary'))}}
                         {{ Form::close() }}
                     </div>
                 </div>

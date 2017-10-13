@@ -46,7 +46,7 @@ io.on('connection', function (socket) {
 
         //Room's code
     socket.on('codeToServer', function (e) {
-        io
+        socket
             .broadcast
             .to(e.room)
             .emit('codeTo'+e.room, {

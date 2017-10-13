@@ -17,6 +17,8 @@
     export default {
         data() {
             return {
+                axios : require('axios'),
+                OnChangeSwitch: true,
                 custoEdit: {},
                 code: '',
                 editorOptions: {
@@ -41,16 +43,28 @@
             },
             onEditorFocus(editor) {
             },
-            onEditorCodeChange(newCode) {
-                //console.log(this);
-                let onLine = this.custoEdit.doc.getCursor().line;
-                let lineContent = this.custoEdit.doc.getLine(onLine);
-                this.$parent.socket.emit('codeToServer', {
-                    room: this.project,
-                    line: onLine,
-                    content: lineContent,
-                });
+            onEditorCodeChange(newCode, changeObj) {
+                this.code = newCode;
+                if (this.OnChangeSwitch) {
+                    let onLine = this.custoEdit.doc.getCursor().line;
+                    let lineContent = this.custoEdit.doc.getValue();
+                    this.$parent.socket.emit('codeToServer', {
+                        room: this.project,
+                        line: onLine,
+                        content: lineContent,
+                    });
+                }
+            },
+            sendCode(content, project, folder, name){
+                axios.post(`/api/saveCode`, {
+                    body: {
+                        content : content,
+                        project : project,
+                        folder : folder,
+                        name : name
 
+                    }
+                })
             }
         },
         computed: {
@@ -59,21 +73,28 @@
             }
         },
         props: ['user', 'project'],
+        created(){
+
+        },
         mounted() {
             let $this = this;
+            this.axios.get('/api/getCode/test/html/index').then(function (response) {
+                return $this.code = response.data;
+            });
+            setInterval(function(){
+                $this.sendCode($this.code, 'test', 'html', 'index')
+            }, 2000);
+
+
+
+
             this.$parent.socket.on('codeTo' + this.project, function (e) {
-                console.log(e)
-                $this.custoEdit.doc.replaceRange(e.line, e.line + 1, e.content);
+                $this.OnChangeSwitch = false;
+                $this.custoEdit.doc.setValue(
+                    e.content,
+                );
+                $this.OnChangeSwitch = true;
             });
         }
     }
 </script>
-
-<--! doc.getCursor(?start: string) → {line, ch}
-Retrieve one end of the primary selection.
-start is an optional string indicating which end
-of the selection to return. It may be "from", "to",
-"head" (the side of the selection that moves when you
-press shift+arrow), or "anchor" (the fixed side of the selection).
-Omitting the argument is the same as passing "head". A {line, ch}
-object will be returned. -->
