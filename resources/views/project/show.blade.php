@@ -7,7 +7,7 @@
         </div>
         <div id="editorcontainer">
         <div id="codebox">
-            <codebox :user="{{$userInfo}}" project="{{$project->name}}"></codebox>
+            <codebox :user="{{$userInfo}}" project="{{$project->name}}" project_id="{{$project->id}}" type="{{$type}}"></codebox>
         </div>
         <div class="container-fluid">
             <div class="row">

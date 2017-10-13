@@ -17,7 +17,7 @@ class CreateFilesTable extends Migration
             $table->increments('id');
             $table->integer('project_id');
             $table->string('type');
-            $table->string('content');
+            $table->longText('content');
             $table->timestamps();
         });
     }

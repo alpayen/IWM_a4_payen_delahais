@@ -89816,7 +89816,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             code: '',
             editorOptions: {
                 tabSize: 4,
-                mode: 'text/javascript',
+                mode: 'text/' + this.type,
                 theme: 'base16-light',
                 lineNumbers: true,
                 line: true,
@@ -89833,7 +89833,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         onEditorReady: function onEditorReady(editor) {
             this.custoEdit = editor;
-            // console.log(this);
         },
         onEditorFocus: function onEditorFocus(editor) {},
         onEditorCodeChange: function onEditorCodeChange(newCode, changeObj) {
@@ -89848,14 +89847,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         },
-        sendCode: function sendCode(content, project, folder, name) {
+        sendCode: function sendCode(content, project_id, type) {
             axios.post('/api/saveCode', {
                 body: {
                     content: content,
-                    project: project,
-                    folder: folder,
-                    name: name
-
+                    project_id: project_id,
+                    type: type
                 }
             });
         }
@@ -89865,17 +89862,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.$refs.codebox.editor;
         }
     },
-    props: ['user', 'project'],
+    props: ['user', 'project', 'project_id', 'type'],
     created: function created() {},
     mounted: function mounted() {
         var $this = this;
-        this.axios.get('/api/getCode/test/html/index').then(function (response) {
+        console.log(this.project_id);
+        console.log(this.type);
+        this.axios.get('/api/getCode/' + this.project_id + '/' + this.type).then(function (response) {
+            console.log(response.data);
             return $this.code = response.data;
         });
         setInterval(function () {
-            $this.sendCode($this.code, 'test', 'html', 'index');
+            $this.sendCode($this.code, $this.project_id, $this.type);
         }, 2000);
-
         this.$parent.socket.on('codeTo' + this.project, function (e) {
             $this.OnChangeSwitch = false;
             $this.custoEdit.doc.setValue(e.content);

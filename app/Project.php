@@ -38,4 +38,8 @@ class Project extends Model
         }
         return $emails;
     }
+
+    public function files(){
+        return $this->hasMany('App\File');
+    }
 }

@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 Route::domain('{project}.localhost')->group(function () {
-
-    Route::get('/live', 'ProjectController@show')->name('project.show');
+    Route::get('/live/{type}', 'ProjectController@show')->name('project.show');
+    Route::get('/live', 'ProjectController@live')->name('project.live');
     Route::get('/edit', 'ProjectController@edit')->name('project.edit');
     Route::put('/update', 'ProjectController@update')->name('project.update');
     Route::delete('/destroy', 'ProjectController@destroy')->name('project.destroy');
