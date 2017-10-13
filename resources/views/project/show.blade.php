@@ -2,9 +2,6 @@
 
 @section('content')
     <div class="container-fluid editor-container" >
-        <div id="sidebar">
-            Here the folders
-        </div>
         <div id="editorcontainer">
         <div id="codebox">
             <codebox :user="{{$userInfo}}" project="{{$project->name}}" project_id="{{$project->id}}" type="{{$type}}"></codebox>

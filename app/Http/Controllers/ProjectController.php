@@ -80,7 +80,7 @@ class ProjectController extends Controller
             if ($request->session()->has('emails')) {
                 $request->session()->pull('emails');
             }
-            return redirect(route('project.show', $project));
+            return redirect(route('project.show',[$project, 'html']));
         }
         return redirect(route('project.create'))->withErrors('An error occured, please try again later');
     }
@@ -142,7 +142,7 @@ class ProjectController extends Controller
                     //TODO SEND INVIATION EMAIL
                 }
             }
-            return redirect(route('project.show', $project));
+            return redirect(route('project.show', [$project, 'html']));
         }
         return redirect(route('project.create'))->withErrors('An error occured, please try again later');
 

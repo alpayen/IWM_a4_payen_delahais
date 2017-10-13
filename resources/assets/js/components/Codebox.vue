@@ -10,10 +10,15 @@
 
 <script>
     import 'codemirror/keymap/sublime';
-
+    import 'codemirror/addon/edit/matchtags.js';
+    import 'codemirror/addon/edit/closetag.js';
+    import 'codemirror/addon/edit/closebrackets.js';
+    import 'codemirror/addon/lint/lint.js';
+    //import 'codemirror/addon/lint/html-lint.js';
+    //import 'codemirror/addon/lint/css-lint.js';
+    //import 'codemirror/addon/lint/javascript-lint.js';
     //let io = require('socket.io-client');
     //let socket = io.connect('http://localhost:3000');
-
     export default {
         data() {
             return {
@@ -22,9 +27,13 @@
                 custoEdit: {},
                 code: '',
                 editorOptions: {
+                    lint : true,
+                    autoCloseTags : true,
+                    matchTags : true,
+                    autoCloseBrackets : true,
                     tabSize: 4,
                     mode: 'text/'+this.type,
-                    theme: 'base16-light',
+                    theme: 'dracula',
                     lineNumbers: true,
                     line: true,
                     keyMap: "sublime",

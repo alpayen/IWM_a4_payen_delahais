@@ -16,7 +16,7 @@
                                     @foreach($createdProjects as $createdProject)
                                         <li class="list-group-item">
                                             <a class="list-group-item list-group-item-action list-group-item-primary text-uppercase"
-                                               href="{{route('project.show',['id'=>$createdProject->id])}}">{{$createdProject->name}}</a>
+                                               href="{{route('project.live',['id'=>$createdProject->id])}}">{{$createdProject->name}}</a>
                                             @if($createdProject->description)
                                                 <p>{{$createdProject->description}}</p>
                                             @endif
@@ -31,7 +31,7 @@
                                     @foreach($projects as $project)
                                         <li class="list-group-item">
                                             <a class="list-group-item list-group-item-action list-group-item-primary text-uppercase"
-                                               href="{{route('project.show',['id'=>$project->id])}}">{{$project->name}}</a>
+                                               href="{{route('project.live',['id'=>$project->id])}}">{{$project->name}}</a>
                                             @if($project->description)
                                                 <p>{{$project->description}}</p>
                                             @endif
