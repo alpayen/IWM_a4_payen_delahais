@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'smtp.mailgun.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'mehdidelahais63@gmail.com', 'name' => 'bas les couilles'],
+        'address' => 'mehdidelahais63@gmail.com', 'name' => 'ProjectDev'],
 
     /*
     |--------------------------------------------------------------------------
@@ -82,9 +82,9 @@ return [
     |
     */
 
-    'username' => env('mehdidelahais63@gmail.com'),
+    'username' => env('MAIL_USERNAME', 'postmaster@sandboxce00330e62e746bc843844138eb3a00a.mailgun.org'),
 
-    'password' =>env('slackdown78'),
+    'password' =>env('MAIL_PASSWORD', 'ef248f72345156469761cc227bdcb067'),
 
     /*
     |--------------------------------------------------------------------------
