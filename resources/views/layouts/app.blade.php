@@ -53,6 +53,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ route('logout') }}"
+
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Logout
@@ -62,6 +63,7 @@
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
+                                <li><a href="{{ asset('/project') }}">Project</a></li>
                             </ul>
                         </li>
                         @endguest

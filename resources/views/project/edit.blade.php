@@ -42,7 +42,6 @@
                             </div>
 
                             <span class="addEmailInput">Click on me me to add another collaborator</span>
-
                         {{Form::submit('Update')}}
                         {{ Form::close() }}
                     </div>
