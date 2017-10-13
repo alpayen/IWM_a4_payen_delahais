@@ -91,11 +91,7 @@ class ProjectController extends Controller
      * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function show(Project $project,$type)
-=======
-    public function show( Project $project)
->>>>>>> cca00a404d54ae47131b42ece385898592112a08
     {
         $user = Auth::user();
         $userInfo = ['name' => $user->name, 'id' => $user->id, 'email' => $user->email];
