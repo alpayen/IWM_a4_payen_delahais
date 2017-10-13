@@ -8,7 +8,7 @@
                     <div class="panel-heading">Welcome</div>
                     <div class="panel-body">
                         <h1>
-                            Welcome to this experiment.
+                            Bienvenue Sur ProjectDev
                         </h1>
                         <p>
                             You should <a href="{{route('login')}}">login</a> or <a href="{{route('register')}}">register</a>

@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use function MongoDB\BSON\toJSON;
 use PhpParser\Node\Expr\Array_;
@@ -70,9 +71,23 @@ class ProjectController extends Controller
                 $user = User::where('email', $email)->first();
                 if ($user) {
                     $user->projects()->save($project);
-                    //TODO SEND EMAIL YOU'VE BEEN ADDED TO A GROUP
+                    $url = url('/project');
+                    $data = [
+                        'title' => 'Bienvenue',
+                        'content' => 'Parce que c\'est NOTRE PROJET '.$url,
+                    ];
+                    Mail::send('mailwelcome' , $data, function ($message) use ($email){
+                        $message->to($email)->subject('ça marche');
+                    });
                 } else {
-                    //TODO SEND INVIATION EMAIL
+                    $url = url('/register');
+                    $data = [
+                        'title' => 'Bienvenue',
+                        'content' => 'Inscrit toi ici : '.$url,
+                    ];
+                    Mail::send('mailwelcome' , $data, function ($message) use (&$email){
+                        $message->to($email)->subject('ça marche');
+                    });
                 }
             }
             if ($request->session()->has('emails')) {
