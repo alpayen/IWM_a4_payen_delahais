@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\User;
-use Illuminate\Http\File;
+use App\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function MongoDB\BSON\toJSON;
@@ -64,6 +64,8 @@ class ProjectController extends Controller
         $project->description = $request->description;
 
         if ($project->save()) {
+            $file = File::setUp($project->id);
+
             $emails = $request->emails;
             foreach ($emails as $email) {
                 $user = User::where('email', $email)->first();
@@ -88,12 +90,12 @@ class ProjectController extends Controller
      * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Project $project,$type)
     {
         $user = Auth::user();
         $userInfo = ['name' => $user->name, 'id' => $user->id, 'email' => $user->email];
         $userInfo = json_encode($userInfo);
-        return view('project.show')->with(compact('project', 'userInfo'));
+        return view('project.show')->with(compact('project', 'userInfo', 'type'));
     }
 
     /**
@@ -155,6 +157,15 @@ class ProjectController extends Controller
     {
         $project->delete();
         return redirect(route('project.index'));
+    }
+
+
+    public function live(Project $project){
+        $files = $project->files;
+        $html = $files->where('type', 'html')->first()->content;
+        $css = $files->where('type', 'css')->first()->content;
+        $js = $files->where('type', 'javascript')->first()->content;
+        return view('live.live')->with(compact('project','html', 'css', 'js'));
     }
 
 

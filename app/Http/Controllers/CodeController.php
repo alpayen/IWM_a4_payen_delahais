@@ -9,22 +9,27 @@ use Illuminate\Http\Request;
 class CodeController extends Controller
 {
 
-    public function saveCode(Request $request){
+    public function saveCode(Request $request)
+    {
         $body = $request->body;
-        $file = File::find($body['project_id']);
-        if($file){
+        $file = File::where('project_id', $body['project_id'])
+        ->where('type', $body['type'])->first();
+        if ($file) {
             $file->content = $this->treatContent($body['content']);
             $file->update();
             return response('Content Saved', 200)
                 ->header('Content-Type', 'text/plain');
-        }else{
+        } else {
             return response('File not found', 404)
                 ->header('Content-Type', 'text/plain');
         }
     }
 
-    public function getCode($project_id, $type){
-        return File::where('project_id', $project_id)->where('type', $type)->first()->content;
+    public function getCode($project_id, $type)
+    {
+        $content = File::where('project_id', $project_id)
+            ->where('type', $type)->first();
+        return $content->content;
     }
 
     /**
@@ -32,10 +37,12 @@ class CodeController extends Controller
      * @param string
      * @return string
      */
-    private function treatContent($string){
+
+    private function treatContent($string)
+    {
         $forbiddenChars = ['<?php', '?>', '<?=', '{{', '}}'];
-        foreach ($forbiddenChars as $char){
-           $string = str_replace($char,'(Looks like php to me)', $string );
+        foreach ($forbiddenChars as $char) {
+            $string = str_replace($char, '(Looks like php to me)', $string);
         }
         return $string;
 

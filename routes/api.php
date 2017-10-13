@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('saveCode', 'CodeController@saveCode');
-Route::get('getCode/{project}/{folder}/{name}', 'CodeController@getCode');
+Route::get('getCode/{project_id}/{type}', 'CodeController@getCode');
