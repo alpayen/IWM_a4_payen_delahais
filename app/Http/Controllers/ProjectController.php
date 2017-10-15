@@ -78,9 +78,9 @@ class ProjectController extends Controller
                         'title' => 'Bienvenue',
                         'content' => 'Parce que c\'est NOTRE PROJET ' . $url,
                     ];
-                    Mail::send('mailwelcome', $data, function ($message) use ($email) {
+                    /*Mail::send('mailwelcome', $data, function ($message) use ($email) {
                         $message->to($email)->subject('ça marche');
-                    });
+                    });*/
                 } else {
                     if ($email != "") {
                         $url = url('/register');
@@ -88,9 +88,9 @@ class ProjectController extends Controller
                             'title' => 'Bienvenue',
                             'content' => 'Inscrit toi ici : ' . $url,
                         ];
-                        Mail::send('mailwelcome', $data, function ($message) use (&$email) {
+                        /*Mail::send('mailwelcome', $data, function ($message) use (&$email) {
                             $message->to($email)->subject('ça marche');
-                        });
+                        });*/
                     }
                 }
             }
@@ -159,9 +159,9 @@ class ProjectController extends Controller
                         'title' => 'Bienvenue',
                         'content' => 'Parce que c\'est NOTRE PROJET ' . $url,
                     ];
-                    Mail::send('mailwelcome', $data, function ($message) use ($email) {
+                   /* Mail::send('mailwelcome', $data, function ($message) use ($email) {
                         $message->to($email)->subject('ça marche');
-                    });
+                    });*/
                 } else {
                     if ($email != "") {
                         $url = url('/register');
@@ -169,9 +169,9 @@ class ProjectController extends Controller
                             'title' => 'Bienvenue',
                             'content' => 'Inscrit toi ici : ' . $url,
                         ];
-                        Mail::send('mailwelcome', $data, function ($message) use (&$email) {
+                        /*Mail::send('mailwelcome', $data, function ($message) use (&$email) {
                             $message->to($email)->subject('ça marche');
-                        });
+                        });*/
 
                     }
                 }

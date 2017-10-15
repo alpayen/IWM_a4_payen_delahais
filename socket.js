@@ -52,7 +52,8 @@ io.on('connection', function (socket) {
             .emit('codeTo'+e.room, {
                 user : e.user,
                 line: e.line,
-                content : e.content
+                content : e.content,
+                type : e.type
             });
     });
 

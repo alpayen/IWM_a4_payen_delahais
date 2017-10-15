@@ -21,6 +21,7 @@
             font-weight: 100;
             height: 100vh;
             margin: 0;
+            background-size: cover ;
         }
         h1, h2, p{
             color: white;

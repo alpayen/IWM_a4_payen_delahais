@@ -2,7 +2,7 @@
     <div>
         <ul>
             <li v-for="msg in messages">
-                <p><span>[{{msg.date}}]</span> {{msg.user.name}} :  {{msg.text}}</p>
+                <p><span></span> {{msg.user.name}} :  {{msg.text}}</p>
             </li>
         </ul>
         <div class="chatForm">

@@ -1,3 +1,10 @@
-To init project please do make sure you have node.js and composer install.
+Instalation du projet :
 
-Run composer update, npm update, php artisan migrate
+MAIL_DRIVER=mailgun
+MAIL_HOST=smtp.mailgun.org
+MAIL_PORT=587
+MAILGUN_DOMAIN=sandboxce00330e62e746bc843844138eb3a00a.mailgun.org
+MAILGUN_SECRET=key-ebd7fa5e741eba32c69fc566921e8a46
+MAIL_USERNAME=postmaster@sandboxce00330e62e746bc843844138eb3a00a.mailgun.org
+MAIL_PASSWORD=ef248f72345156469761cc227bdcb067
+MAIL_ENCRYPTION=tls

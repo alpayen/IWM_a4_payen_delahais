@@ -10,8 +10,8 @@
                 <div class="col-md-6 panel-body text-center">
                         <h2>Commence le Projet</h2>
                         <p>
-                            You should <a class="lead" href="{{route('register')}}">register</a>
-                            to start your journey
+                            Créer toi un compte <a class="lead" href="{{route('register')}}">ici</a>
+                            pour commencer ton projet
                         </p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -21,7 +21,7 @@
 
                 <div class="col-md-6 panel-body text-center">
                     <h2>Revient sur ton Projet</h2>
-                    <p>You should <a class="lead" href="{{route('login')}}">login</a> to start your journey</p>
+                    <p>Clique <a class="lead" href="{{route('login')}}">ici</a> pour retrouver ton projet</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in

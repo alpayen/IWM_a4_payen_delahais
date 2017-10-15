@@ -89690,7 +89690,7 @@ var render = function() {
       _vm._l(_vm.messages, function(msg) {
         return _c("li", [
           _c("p", [
-            _c("span", [_vm._v("[" + _vm._s(msg.date) + "]")]),
+            _c("span"),
             _vm._v(" " + _vm._s(msg.user.name) + " :  " + _vm._s(msg.text))
           ])
         ])
@@ -89871,7 +89871,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.$parent.socket.emit('codeToServer', {
                     room: this.project,
                     line: onLine,
-                    content: lineContent
+                    content: lineContent,
+                    type: this.type
                 });
             }
         },
@@ -89906,7 +89907,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }, 2000);
         this.$parent.socket.on('codeTo' + this.project, function (e) {
             $this.OnChangeSwitch = false;
-            $this.custoEdit.doc.setValue(e.content);
+            console.log(e.type);
+            console.log($this.type);
+            if (e.type == $this.type) {
+                $this.custoEdit.doc.setValue(e.content);
+            }
             $this.OnChangeSwitch = true;
         });
     }

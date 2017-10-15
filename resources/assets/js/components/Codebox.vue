@@ -60,6 +60,7 @@
                         room: this.project,
                         line: onLine,
                         content: lineContent,
+                        type : this.type
                     });
                 }
             },
@@ -96,9 +97,13 @@
             }, 2000);
             this.$parent.socket.on('codeTo' + this.project, function (e) {
                 $this.OnChangeSwitch = false;
-                $this.custoEdit.doc.setValue(
-                    e.content,
+                console.log(e.type)
+                console.log( $this.type)
+                if(e.type == $this.type){
+                    $this.custoEdit.doc.setValue(
+                     e.content,
                 );
+                }
                 $this.OnChangeSwitch = true;
             });
         }
