@@ -2,11 +2,13 @@ Instalation du projet :
 
 Après le clone, a la racine : 
 
+
 composer udpate
 npm update
 npm run dev
 node socket.js
 php artisan migrate.
+php artisan key:generate
 
 Infos complémentaires : 
 
