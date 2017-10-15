@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('template.app2')
 
 @section('content')
     <div class="container">
@@ -20,10 +20,10 @@
                             {{ Form::open(array('url' => route('project.store'))) }}
 
                             {{Form::label('name', 'Project\'s name *')}}
-                            {{Form::text('name', Null,  array('class' => 'form-control'))}}
+                            {{Form::text('name', Null,  array('class' => 'input form-control'))}}
 
                             {{Form::label('description', 'Project\'s description (optional)')}}
-                            {{Form::textarea('description' , Null , array('class' => 'form-control'))}}
+                            {{Form::textarea('description' , Null , array('class' => 'input form-control'))}}
 
                         <br>
                         <div class="emailsInputHolder">
@@ -38,10 +38,11 @@
                             @endif
                             <span class="addEmailInput">Click on me me to add another collaborator</span>
                             <div class="inputGroupSingleEmpty" id="emailInputEmpty">
-                                <input class="form-control" type="email" name="emails[]">
+                                <input class="input form-control" type="email" name="emails[]">
                             </div>
                         </div>
-                            {{Form::submit('Create', array('class' => 'btn btn-primary'))}}
+                            <br>
+                            {{Form::submit('Create', array('class' => 'submit btn btn-primary'))}}
                         {{ Form::close() }}
                     </div>
                 </div>

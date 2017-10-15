@@ -1,24 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Laravel</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }} ">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- JS Libs -->
-    <script
-            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <style>
 
         html, body {
@@ -28,10 +21,12 @@
             margin: 0;
             background-color: aliceblue;
         }
-        h1, h2{
+
+        h1, h2 {
             color: #1f648b;
             margin: 1%;
         }
+
         .links > a {
             color: #1d658b;
             padding: 0 25px;
@@ -40,6 +35,32 @@
             letter-spacing: .1rem;
             text-decoration: none;
             text-transform: uppercase;
+        }
+
+        .lien {
+            text-align: center;
+        }
+
+        .input {
+            box-sizing: border-box;
+            cursor: pointer;
+            padding: 0 20px;
+            overflow: hidden;
+            border: none;
+            border-radius: 21px;
+            font: normal 20px/normal "Antic", Helvetica, sans-serif;
+            color: rgb(255, 255, 255);
+            text-overflow: ellipsis;
+            background: rgba(29, 101, 139, 0.4);
+            box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.5) inset;
+            -moz-transition: all 502ms cubic-bezier(0.68, -0.75, 0.265, 1.75);
+            -o-transition: all 502ms cubic-bezier(0.68, -0.75, 0.265, 1.75);
+            transition: all 502ms cubic-bezier(0.68, -0.75, 0.265, 1.75);
+        }
+
+        .submit {
+            background-color: #a2c1d0;
+            border-color: #a2c1d0;
         }
 
     </style>
@@ -59,10 +80,9 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url(route('project.index')) }}">
-                 < Back To Safety |
+            <a class="navbar-brand" href="{{ url('/') }}">
+                ProdjectDev
             </a>
-            <a href="{{route('project.edit', $project)}}">Edit</a> |
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -101,24 +121,3 @@
         </div>
     </div>
 </nav>
-
-<div id="sidebar">
-    <ul class="list-group">
-        <li class="list-group-item"><a href="{{route('project.live', [$project])}}">Live Version ! </a></li>
-        <li class="list-group-item"><a href="{{route('project.show', [$project, "type"=>'html'])}}">Html</a></li>
-        <li class="list-group-item"><a href="{{route('project.show',[$project, "type"=>'css'])}}">CSS</a></li>
-        <li class="list-group-item"><a href="{{route('project.show',[$project, "type"=>'javascript'])}}">Javascript (jQuery Enabled)</a></li>
-    </ul>
-</div>
-<div id="app">
-    @yield('content')
-</div>
-<!-- Scripts -->
-<script>
-    window.Laravel = <?php echo json_encode([
-        'csrfToken' => csrf_token(),
-    ]); ?>
-</script>
-<script src="{{asset('js/app.js')}}"></script>
-</body>
-</html>

@@ -1,9 +1,8 @@
-@extends('layouts.app')
+@extends('template.app2')
 
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Welcome {{$user->name}}
                         <a href="{{route('project.create')}}">Créer un projet</a>
@@ -14,8 +13,8 @@
                             <ul class="list-group">
                                 @if(count($createdProjects ) != 0)
                                     @foreach($createdProjects as $createdProject)
-                                        <li class="list-group-item">
-                                            <a class="list-group-item list-group-item-action list-group-item-primary text-uppercase"
+                                        <li class="lien list-group-item col-md-6">
+                                            <a class="list-group-item list-group-item-info"
                                                href="{{route('project.live',['id'=>$createdProject->id])}}">{{$createdProject->name}}</a>
                                             @if($createdProject->description)
                                                 <p>{{$createdProject->description}}</p>
@@ -29,8 +28,8 @@
 
                                 @if(count($projects) != 0)
                                     @foreach($projects as $project)
-                                        <li class="list-group-item">
-                                            <a class="list-group-item list-group-item-action list-group-item-primary text-uppercase"
+                                        <li class="lien list-group-item col-md-6">
+                                            <a class="list-group-item list-group-item-info"
                                                href="{{route('project.live',['id'=>$project->id])}}">{{$project->name}}</a>
                                             @if($project->description)
                                                 <p>{{$project->description}}</p>
@@ -42,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
         </div>
     </div>
 @endsection
