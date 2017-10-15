@@ -1,5 +1,21 @@
 Instalation du projet :
 
+Après le clone, a la racine : 
+
+composer udpate
+npm update
+npm run dev
+node socket.js
+php artisan migrate.
+
+Infos complémentaires : 
+
+Nous avons mis en place un système de mailing en mode sandbox chez Mailgun. 
+Les lignes sont commentés, car il faut ajouter les emails de destinataires un par un
+sur le site mailgun, et nous avons juger cela trop contraigannt pour une béta.
+
+Bon code !
+
 MAIL_DRIVER=mailgun
 MAIL_HOST=smtp.mailgun.org
 MAIL_PORT=587
