@@ -44,12 +44,23 @@
                 $this.messages.push({
                     user: e.user,
                     text: e.text,
-                    date: Date.now()
+                    date: this.getTime
 
                 })
             });
         },
         methods: {
+            getTime : function () {
+                let currentTime = new Date(),
+                    hours = currentTime.getHours(),
+                    minutes = currentTime.getMinutes();
+
+                if (minutes < 10) {
+                    minutes = "0" + minutes;
+                }
+
+                return hours + ":" + minutes;
+            },
             chatSubmit: function () {
                 if (this.chatMsg) {
                     this.$parent.socket.emit('msgToServer', {
@@ -62,6 +73,7 @@
             }
         }
     }
+
 
 </script>
 

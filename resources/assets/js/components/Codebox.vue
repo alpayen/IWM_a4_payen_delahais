@@ -83,6 +83,7 @@
 
         },
         mounted() {
+            console.log(this.type);
             let $this = this;
             console.log(this.project_id);
             console.log(this.type);

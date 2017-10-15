@@ -89645,13 +89645,24 @@ function callEventListner() {}
             $this.messages.push({
                 user: e.user,
                 text: e.text,
-                date: Date.now()
+                date: this.getTime
 
             });
         });
     },
 
     methods: {
+        getTime: function getTime() {
+            var currentTime = new Date(),
+                hours = currentTime.getHours(),
+                minutes = currentTime.getMinutes();
+
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+
+            return hours + ":" + minutes;
+        },
         chatSubmit: function chatSubmit() {
             if (this.chatMsg) {
                 this.$parent.socket.emit('msgToServer', {
@@ -89882,6 +89893,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['user', 'project', 'project_id', 'type'],
     created: function created() {},
     mounted: function mounted() {
+        console.log(this.type);
         var $this = this;
         console.log(this.project_id);
         console.log(this.type);

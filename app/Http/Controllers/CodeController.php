@@ -17,7 +17,7 @@ class CodeController extends Controller
         if ($file) {
             $file->content = $this->treatContent($body['content']);
             $file->update();
-            return response('Content Saved', 200)
+            return response('Content Saved to '.$file->type, 200)
                 ->header('Content-Type', 'text/plain');
         } else {
             return response('File not found', 404)
@@ -29,6 +29,7 @@ class CodeController extends Controller
     {
         $content = File::where('project_id', $project_id)
             ->where('type', $type)->first();
+
         return $content->content;
     }
 

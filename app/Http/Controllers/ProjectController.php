@@ -76,26 +76,28 @@ class ProjectController extends Controller
                     $url = url('/project');
                     $data = [
                         'title' => 'Bienvenue',
-                        'content' => 'Parce que c\'est NOTRE PROJET '.$url,
+                        'content' => 'Parce que c\'est NOTRE PROJET ' . $url,
                     ];
-                    Mail::send('mailwelcome' , $data, function ($message) use ($email){
+                    Mail::send('mailwelcome', $data, function ($message) use ($email) {
                         $message->to($email)->subject('ça marche');
                     });
                 } else {
-                    $url = url('/register');
-                    $data = [
-                        'title' => 'Bienvenue',
-                        'content' => 'Inscrit toi ici : '.$url,
-                    ];
-                    Mail::send('mailwelcome' , $data, function ($message) use (&$email){
-                        $message->to($email)->subject('ça marche');
-                    });
+                    if ($email != "") {
+                        $url = url('/register');
+                        $data = [
+                            'title' => 'Bienvenue',
+                            'content' => 'Inscrit toi ici : ' . $url,
+                        ];
+                        Mail::send('mailwelcome', $data, function ($message) use (&$email) {
+                            $message->to($email)->subject('ça marche');
+                        });
+                    }
                 }
             }
             if ($request->session()->has('emails')) {
                 $request->session()->pull('emails');
             }
-            return redirect(route('project.show',[$project, 'html']));
+            return redirect(route('project.show', [$project, 'html']));
         }
         return redirect(route('project.create'))->withErrors('An error occured, please try again later');
     }
@@ -106,7 +108,7 @@ class ProjectController extends Controller
      * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project,$type)
+    public function show(Project $project, $type)
     {
         $user = Auth::user();
         $userInfo = ['name' => $user->name, 'id' => $user->id, 'email' => $user->email];
@@ -152,9 +154,26 @@ class ProjectController extends Controller
                 $user = User::where('email', $email)->first();
                 if ($user && !in_array($email, $project->getUsersEmail())) {
                     $user->projects()->save($project);
-                    //TODO SEND EMAIL YOU'VE BEEN ADDED TO A GROUP
+                    $url = url('/project');
+                    $data = [
+                        'title' => 'Bienvenue',
+                        'content' => 'Parce que c\'est NOTRE PROJET ' . $url,
+                    ];
+                    Mail::send('mailwelcome', $data, function ($message) use ($email) {
+                        $message->to($email)->subject('ça marche');
+                    });
                 } else {
-                    //TODO SEND INVIATION EMAIL
+                    if ($email != "") {
+                        $url = url('/register');
+                        $data = [
+                            'title' => 'Bienvenue',
+                            'content' => 'Inscrit toi ici : ' . $url,
+                        ];
+                        Mail::send('mailwelcome', $data, function ($message) use (&$email) {
+                            $message->to($email)->subject('ça marche');
+                        });
+
+                    }
                 }
             }
             return redirect(route('project.show', [$project, 'html']));
@@ -169,19 +188,22 @@ class ProjectController extends Controller
      * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public
+    function destroy(Project $project)
     {
         $project->delete();
         return redirect(route('project.index'));
     }
 
 
-    public function live(Project $project){
+    public
+    function live(Project $project)
+    {
         $files = $project->files;
         $html = $files->where('type', 'html')->first()->content;
         $css = $files->where('type', 'css')->first()->content;
         $js = $files->where('type', 'javascript')->first()->content;
-        return view('live.live')->with(compact('project','html', 'css', 'js'));
+        return view('live.live')->with(compact('project', 'html', 'css', 'js'));
     }
 
 
