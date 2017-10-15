@@ -9,6 +9,7 @@
     <h1>{{$title}}</h1>
     <p>{{$content}}</p>
     <p>Cordialement</p>
+    <p> L'Equipe de ProjectDev </p>
 
 </body>
 </html>

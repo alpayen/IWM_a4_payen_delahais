@@ -1,39 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Laravel</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }} ">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- JS Libs -->
-    <script
-            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <style>
 
         html, body {
+            background-image: url(https://www.netdevices.fr/wp-content/uploads/2017/03/int%C3%A9gration-continue-et-les-outils-de-version-de-code.jpeg);
+            color: #636b6f;
             font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial;
             font-weight: 100;
             height: 100vh;
             margin: 0;
-            background-color: aliceblue;
         }
-        h1, h2{
-            color: #1f648b;
-            margin: 1%;
+        h1, h2, p{
+            color: white;
+            margin: 4%;
         }
         .links > a {
-            color: #1d658b;
+            color: #636b6f;
             padding: 0 25px;
             font-size: 12px;
             font-weight: 600;
@@ -50,8 +44,7 @@
         <div class="navbar-header">
 
             <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#app-navbar-collapse">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                 <span class="sr-only">Toggle Navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -59,10 +52,9 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url(route('project.index')) }}">
-                 < Back To Safety |
+            <a class="navbar-brand" href="{{ url('/') }}">
+                ProdjectDev
             </a>
-            <a href="{{route('project.edit', $project)}}">Edit</a> |
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -101,24 +93,3 @@
         </div>
     </div>
 </nav>
-
-<div id="sidebar">
-    <ul class="list-group">
-        <li class="list-group-item"><a href="{{route('project.live', [$project])}}">Live Version ! </a></li>
-        <li class="list-group-item"><a href="{{route('project.show', [$project, "type"=>'html'])}}">Html</a></li>
-        <li class="list-group-item"><a href="{{route('project.show',[$project, "type"=>'css'])}}">CSS</a></li>
-        <li class="list-group-item"><a href="{{route('project.show',[$project, "type"=>'javascript'])}}">Javascript (jQuery Enabled)</a></li>
-    </ul>
-</div>
-<div id="app">
-    @yield('content')
-</div>
-<!-- Scripts -->
-<script>
-    window.Laravel = <?php echo json_encode([
-        'csrfToken' => csrf_token(),
-    ]); ?>
-</script>
-<script src="{{asset('js/app.js')}}"></script>
-</body>
-</html>
